@@ -37,7 +37,7 @@ export function MockDataModal({ open, schema, projectName, onClose }: MockDataMo
     return generateMockSql(schema, clamped);
   }, [schema, rows]);
 
-  const slug = projectName.toLowerCase().replace(/\W+/g, "-") || "schemaflow";
+  const slug = projectName.toLowerCase().replace(/\W+/g, "-") || "schema-desk";
 
   const copy = async () => {
     const ok = await copyTextToClipboard(sql);

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SchemaFlow — Turn SQL into database diagrams",
+  title: "Schema Desk — Turn SQL into database diagrams",
   description:
     "Visualize your database schema instantly. Paste SQL, explore relationships, and design your database visually.",
 };
@@ -27,7 +27,7 @@ export const viewport: Viewport = {
   ],
 };
 
-const themeBootstrap = `(function(){try{var t=localStorage.getItem("schemaflow:theme");var d=t==="light"?"light":"dark";document.documentElement.setAttribute("data-theme",d);document.documentElement.style.colorScheme=d;}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`;
+const themeBootstrap = `(function(){try{var t=localStorage.getItem("schema-desk:theme");var d=t==="light"?"light":"dark";document.documentElement.setAttribute("data-theme",d);document.documentElement.style.colorScheme=d;}catch(e){document.documentElement.setAttribute("data-theme","dark");}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (

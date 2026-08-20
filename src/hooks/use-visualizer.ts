@@ -45,17 +45,17 @@ const DEFAULT_PREFS: DiagramPreferences = {
 export function useVisualizer(initialExampleId?: string) {
   const { toast } = useToast();
 
-  const [sql, setSql, flushSql] = useLocalStorage("schemaflow:sql", "");
-  const [projectName, setProjectName] = useLocalStorage("schemaflow:project-name", "Untitled schema");
-  const [savedPrefs, setPrefs] = useLocalStorage<DiagramPreferences>("schemaflow:prefs", DEFAULT_PREFS);
+  const [sql, setSql, flushSql] = useLocalStorage("schema-desk:sql", "");
+  const [projectName, setProjectName] = useLocalStorage("schema-desk:project-name", "Untitled schema");
+  const [savedPrefs, setPrefs] = useLocalStorage<DiagramPreferences>("schema-desk:prefs", DEFAULT_PREFS);
   // Merge with defaults so prefs saved before a field existed still behave.
   const prefs = useMemo<DiagramPreferences>(
     () => ({ ...DEFAULT_PREFS, ...savedPrefs }),
     [savedPrefs],
   );
-  const [panelSize, setPanelSize] = useLocalStorage("schemaflow:panel-size", 440);
-  const [positions, setPositions] = useLocalStorage<Record<string, XYPosition>>("schemaflow:positions", {});
-  const [sqlPanelOpen, setSqlPanelOpen] = useLocalStorage("schemaflow:sql-panel", true);
+  const [panelSize, setPanelSize] = useLocalStorage("schema-desk:panel-size", 440);
+  const [positions, setPositions] = useLocalStorage<Record<string, XYPosition>>("schema-desk:positions", {});
+  const [sqlPanelOpen, setSqlPanelOpen] = useLocalStorage("schema-desk:sql-panel", true);
 
   const [schema, setSchema] = useState<DatabaseSchema | null>(null);
   const [error, setError] = useState<ParseDiagnostic | null>(null);
@@ -69,7 +69,7 @@ export function useVisualizer(initialExampleId?: string) {
   const [paletteOpen, setPaletteOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState<"sql" | "diagram">("diagram");
   const [focusMode, setFocusMode] = useState(false);
-  const [storedNotes, setNotes] = useLocalStorage<StoredNote[]>("schemaflow:notes", []);
+  const [storedNotes, setNotes] = useLocalStorage<StoredNote[]>("schema-desk:notes", []);
 
   const rfInstanceRef = useRef<ReactFlowInstance<SchemaNode, SchemaEdge> | null>(null);
   const pendingFitRef = useRef(false);
@@ -171,9 +171,9 @@ export function useVisualizer(initialExampleId?: string) {
     // 2) Otherwise consume a schema queued by the landing page's import flow.
     if (text === sql) {
       try {
-        const pending = sessionStorage.getItem("schemaflow:pending-import");
+        const pending = sessionStorage.getItem("schema-desk:pending-import");
         if (pending) {
-          sessionStorage.removeItem("schemaflow:pending-import");
+          sessionStorage.removeItem("schema-desk:pending-import");
           const data = JSON.parse(pending) as { name?: string; sql?: string };
           if (data.sql && data.sql.trim()) {
             text = data.sql;
@@ -747,7 +747,7 @@ export function useVisualizer(initialExampleId?: string) {
   const handleExportPng = useCallback(async () => {
     if (!schema) return;
     try {
-      await exportPng(exportInput, `schemaflow-${projectName.toLowerCase().replace(/\W+/g, "-")}.png`);
+      await exportPng(exportInput, `schema-desk-${projectName.toLowerCase().replace(/\W+/g, "-")}.png`);
       toast({ title: "Exported PNG", variant: "success" });
     } catch {
       toast({ title: "Export failed", description: "Could not render the diagram.", variant: "error" });
@@ -757,7 +757,7 @@ export function useVisualizer(initialExampleId?: string) {
   const handleExportSvg = useCallback(() => {
     if (!schema) return;
     try {
-      exportSvg(exportInput, `schemaflow-${projectName.toLowerCase().replace(/\W+/g, "-")}.svg`);
+      exportSvg(exportInput, `schema-desk-${projectName.toLowerCase().replace(/\W+/g, "-")}.svg`);
       toast({ title: "Exported SVG", variant: "success" });
     } catch {
       toast({ title: "Export failed", description: "Could not render the diagram.", variant: "error" });
@@ -766,7 +766,7 @@ export function useVisualizer(initialExampleId?: string) {
 
   const handleExportDocs = useCallback(() => {
     if (!schema) return;
-    const slug = projectName.toLowerCase().replace(/\W+/g, "-") || "schemaflow";
+    const slug = projectName.toLowerCase().replace(/\W+/g, "-") || "schema-desk";
     downloadTextFile(
       generateMarkdownDocs(schema, projectName),
       `${slug}-schema.md`,
@@ -780,7 +780,7 @@ export function useVisualizer(initialExampleId?: string) {
       toast({ title: "Nothing to export", description: "The editor is empty.", variant: "info" });
       return;
     }
-    const slug = projectName.toLowerCase().replace(/\W+/g, "-") || "schemaflow";
+    const slug = projectName.toLowerCase().replace(/\W+/g, "-") || "schema-desk";
     exportSql(sql, `${slug}.sql`);
     toast({ title: "Exported SQL", variant: "success" });
   }, [projectName, sql, toast]);

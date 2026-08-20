@@ -11,8 +11,8 @@ import {
 
 export type Theme = "dark" | "light";
 
-const STORAGE_KEY = "schemaflow:theme";
-const CHANGE_EVENT = "schemaflow:theme-change";
+const STORAGE_KEY = "schema-desk:theme";
+const CHANGE_EVENT = "schema-desk:theme-change";
 
 interface ThemeContextValue {
   theme: Theme;

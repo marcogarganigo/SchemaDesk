@@ -129,7 +129,7 @@ export function LandingPage() {
         if (!text.trim()) return;
         try {
           sessionStorage.setItem(
-            "schemaflow:pending-import",
+            "schema-desk:pending-import",
             JSON.stringify({ name: file.name.replace(/\.(sql|txt)$/i, ""), sql: text }),
           );
         } catch {
@@ -334,7 +334,7 @@ export function LandingPage() {
             <Logo />
           </div>
           <p className="text-[12px] text-muted">
-            © {new Date().getFullYear()} SchemaFlow — built for developers.
+            © {new Date().getFullYear()} Schema Desk — built for developers.
           </p>
           <div className="flex items-center gap-5 text-[12.5px] text-muted">
             <Link href="/" className="transition-colors hover:text-foreground">

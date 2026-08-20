@@ -286,10 +286,10 @@ kbd {
 
 .react-flow__edge.selected .react-flow__edge-path {
   stroke-dasharray: 7 4;
-  animation: schemaflow-dash 0.7s linear infinite;
+  animation: schema-desk-dash 0.7s linear infinite;
 }
 
-@keyframes schemaflow-dash {
+@keyframes schema-desk-dash {
   to {
     stroke-dashoffset: -11;
   }

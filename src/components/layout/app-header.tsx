@@ -155,8 +155,8 @@ export function AppHeader({
   return (
     <header className="flex h-12 shrink-0 items-center gap-2 border-b border-border bg-surface px-3">
       {/* Brand */}
-      <Link href="/" className="flex items-center gap-2 pr-1" aria-label="SchemaFlow home">
-        <Logo wordmarkClassName="hidden sm:block" />
+      <Link href="/" className="flex items-center gap-2 pr-1" aria-label="Schema Desk home">
+        <Logo wordmarkClassName="hidden sm:block" animate />
       </Link>
 
       <div className="mx-1 h-5 w-px bg-border-subtle" />

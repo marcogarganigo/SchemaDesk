@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
 
-## Getting Started
+# Schema Desk
 
-First, run the development server:
+**Turn SQL into beautiful database diagrams.**
+
+Paste DDL, explore relationships, and design your database visually — all in your browser.
+
+</div>
+
+---
+
+## ✨ Features
+
+- **Paste & Parse** — Detect tables, columns, keys, indexes and relationships from DDL instantly.
+- **Intelligent Layout** — Tables arrange around their relationships with automatic graph layout. Switch between left-to-right and top-to-bottom flows.
+- **Multi-Dialect** — Understands MySQL, PostgreSQL and SQLite syntax out of the box.
+- **Format SQL** — Normalize and indent your schema with a single command.
+- **Export Anywhere** — Download crisp PNG or SVG diagrams, or copy them straight to your clipboard.
+- **Share via Link** — Generate a URL that carries the entire schema — no server needed.
+- **Mock Data** — Generate realistic seed data for every table, respecting foreign keys and column types.
+- **Schema Docs** — Export a Markdown reference document for your database.
+- **Dark & Light** — Full theme support with system preference detection.
+- **100% Private** — Everything runs in your browser. Your schema never leaves your machine.
+
+## 🛠 Tech Stack
+
+| Layer | Tool |
+|---|---|
+| Framework | [Next.js](https://nextjs.org) 16 |
+| UI | [React](https://react.dev) 19 · [Tailwind CSS](https://tailwindcss.com) 4 |
+| Diagram | [xyflow](https://xyflow.com) · [dagre](https://github.com/dagrejs/dagre) |
+| Icons | [Lucide](https://lucide.dev) |
+| Animation | [Motion](https://motion.dev) |
+| Language | TypeScript 5 |
+
+## 🚀 Getting Started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Install dependencies
+pnpm install
+
+# Start the dev server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) and paste some SQL.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📦 Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `pnpm dev` | Start development server |
+| `pnpm build` | Production build |
+| `pnpm start` | Run production server |
+| `pnpm lint` | Lint with ESLint |
 
-## Learn More
+## 📂 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/              # Next.js App Router pages
+├── components/
+│   ├── diagram/      # React Flow diagram nodes & canvas
+│   ├── editor/       # SQL code editor
+│   ├── landing/      # Marketing landing page
+│   ├── layout/       # App header & shell
+│   ├── providers/    # Theme & app providers
+│   ├── ui/           # Reusable UI primitives
+│   └── visualizer/   # Main visualizer page
+├── hooks/            # Custom React hooks
+└── lib/
+    ├── docs/         # Markdown doc generation
+    ├── examples/     # Built-in example schemas
+    ├── export/       # PNG / SVG / SQL export
+    ├── format/       # SQL formatter
+    ├── graph/        # Graph building & layout
+    ├── mock/         # Mock data generation
+    ├── parser/       # SQL DDL parser
+    └── schema/       # Schema types & utilities
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT

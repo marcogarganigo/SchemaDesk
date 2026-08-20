@@ -175,7 +175,7 @@ export function DiagramPreview() {
         <span className="h-2.5 w-2.5 rounded-full bg-warning/70" />
         <span className="h-2.5 w-2.5 rounded-full bg-success/70" />
         <span className="ml-3 flex-1 truncate text-center font-mono text-[11px] text-faint">
-          schemaflow — blog.sql
+          schema desk — blog.sql
         </span>
       </div>
 

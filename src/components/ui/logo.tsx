@@ -15,16 +15,18 @@ interface LogoProps {
   /** Extra classes for the wordmark span (e.g. hiding it on small screens). */
   wordmarkClassName?: string;
   size?: "sm" | "md";
+  /** Force the intro animation to replay (e.g. on page navigation). */
+  animate?: boolean;
 }
 
 /**
- * SchemaFlow logo — a minimal "flow" mark: three nodes joined by two curves
- * that trace an abstract S (SchemaFlow), followed by the wordmark. The accent
- * dot between "Schema" and "Flow" is the junction where they connect.
+ * Schema Desk logo — a minimal "flow" mark: three nodes joined by two curves
+ * that trace an abstract S (Schema Desk), followed by the wordmark. The accent
+ * dot between "Schema" and "Desk" is the junction where they connect.
  */
-export function Logo({ className, wordmarkClassName, size = "sm" }: LogoProps) {
-  const [settled, setSettled] = useState(introPlayed);
-  const playIntro = !introPlayed && !settled;
+export function Logo({ className, wordmarkClassName, size = "sm", animate = false }: LogoProps) {
+  const [settled, setSettled] = useState(introPlayed && !animate);
+  const playIntro = animate ? !settled : !introPlayed && !settled;
 
   useEffect(() => {
     introPlayed = true;
@@ -35,6 +37,14 @@ export function Logo({ className, wordmarkClassName, size = "sm" }: LogoProps) {
     const t = setTimeout(() => setSettled(true), 1050);
     return () => clearTimeout(t);
   }, []);
+
+  // When animate is true, re-trigger the intro sequence.
+  useEffect(() => {
+    if (!animate) return;
+    setSettled(false);
+    const t = setTimeout(() => setSettled(true), 1050);
+    return () => clearTimeout(t);
+  }, [animate]);
 
   const markClass = size === "md" ? "h-[19px] w-[19px]" : "h-[16px] w-[16px]";
   const textClass = size === "md" ? "text-[15px]" : "text-[13px]";
@@ -102,7 +112,7 @@ export function Logo({ className, wordmarkClassName, size = "sm" }: LogoProps) {
             playIntro && "sf-logo-dot",
           )}
         />
-        Flow
+        Desk
       </span>
     </span>
   );

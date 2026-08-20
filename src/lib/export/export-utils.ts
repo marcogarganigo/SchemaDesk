@@ -51,7 +51,7 @@ function buildSvg(input: ExportInput) {
   });
 }
 
-export async function exportPng(input: ExportInput, filename = "schemaflow.png") {
+export async function exportPng(input: ExportInput, filename = "schema-desk.png") {
   const { svg, width, height } = buildSvg(input);
   const png = await svgToPngBlob(svg, width, height);
   const url = URL.createObjectURL(png);
@@ -59,7 +59,7 @@ export async function exportPng(input: ExportInput, filename = "schemaflow.png")
   URL.revokeObjectURL(url);
 }
 
-export function exportSvg(input: ExportInput, filename = "schemaflow.svg") {
+export function exportSvg(input: ExportInput, filename = "schema-desk.svg") {
   const { svg } = buildSvg(input);
   const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(blob);
@@ -68,7 +68,7 @@ export function exportSvg(input: ExportInput, filename = "schemaflow.svg") {
 }
 
 /** Download the SQL source itself as a plain-text .sql file. */
-export function exportSql(sql: string, filename = "schemaflow.sql") {
+export function exportSql(sql: string, filename = "schema-desk.sql") {
   downloadTextFile(sql, filename, "text/plain;charset=utf-8");
 }
 

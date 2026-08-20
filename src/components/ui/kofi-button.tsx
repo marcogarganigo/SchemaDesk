@@ -22,7 +22,7 @@ export function KoFiButton({ variant = "pill", className, children }: KoFiButton
       href={KO_FI_URL}
       target="_blank"
       rel="noreferrer"
-      aria-label="Support SchemaFlow on Ko-fi"
+      aria-label="Support Schema Desk on Ko-fi"
       className={cn(
         "inline-flex select-none items-center justify-center gap-1.5 transition-colors duration-150",
         "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",

@@ -212,7 +212,7 @@ export function generateMockSql(
   }
 
   const lines: string[] = [
-    `-- SchemaFlow seed data · ${schema.dialect}`,
+    `-- Schema Desk seed data · ${schema.dialect}`,
     `-- Generated deterministically from the current schema.`,
     "",
   ];

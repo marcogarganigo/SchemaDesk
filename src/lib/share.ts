@@ -5,7 +5,7 @@
  * distinguishable from other future hash payloads.
  */
 
-const PREFIX = "schemaflow:v1:";
+const PREFIX = "schema-desk:v1:";
 
 /** Encode SQL into a URL-hash-safe string (UTF-8 aware base64). */
 export function encodeSqlToHash(sql: string): string {
