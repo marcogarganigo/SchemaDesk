@@ -1,0 +1,473 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Design tokens                                                      */
+/* ------------------------------------------------------------------ */
+
+:root {
+  /* Light theme */
+  --bg: #f6f7f8;
+  --bg-surface: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-raised: #eef0f2;
+  --bg-overlay: rgba(246, 247, 248, 0.72);
+  --border-subtle: rgba(17, 20, 26, 0.06);
+  --border: rgba(17, 20, 26, 0.12);
+  --border-strong: rgba(17, 20, 26, 0.2);
+  --text-primary: #16181d;
+  --text-secondary: #414650;
+  --text-muted: #6a7079;
+  --text-faint: #9aa0a9;
+  --accent: #4f46e5;
+  --accent-strong: #4338ca;
+  --accent-soft: rgba(79, 70, 229, 0.12);
+  --accent-contrast: #ffffff;
+  --danger: #dc2626;
+  --danger-soft: rgba(220, 38, 38, 0.1);
+  --warning: #b45309;
+  --warning-soft: rgba(217, 119, 6, 0.14);
+  --success: #059669;
+  --success-soft: rgba(5, 150, 105, 0.12);
+  --pk: #b45309;
+  --pk-soft: rgba(217, 119, 6, 0.14);
+  --fk: #0369a1;
+  --fk-soft: rgba(2, 132, 199, 0.13);
+  --uq: #6d28d9;
+  --uq-soft: rgba(124, 58, 237, 0.13);
+  --canvas-dot: rgba(17, 20, 26, 0.12);
+  --node-bg: #ffffff;
+  --node-header: rgba(17, 20, 26, 0.025);
+  --node-row-border: rgba(17, 20, 26, 0.05);
+  --edge: #9aa3ae;
+  --edge-selected: #4f46e5;
+  --editor-keyword: #3b5bdb;
+  --editor-string: #0c7a4d;
+  --editor-number: #b45309;
+  --editor-comment: #8b919b;
+  --editor-punct: #7a828c;
+  --shadow-node: 0 1px 2px rgba(17, 20, 26, 0.06);
+  --shadow-pop: 0 8px 28px rgba(17, 20, 26, 0.16), 0 2px 8px rgba(17, 20, 26, 0.08);
+  --shadow-float: 0 12px 40px rgba(17, 20, 26, 0.22), 0 2px 10px rgba(17, 20, 26, 0.1);
+  --ring: rgba(79, 70, 229, 0.5);
+}
+
+[data-theme="dark"] {
+  --bg: #0a0b0d;
+  --bg-surface: #101114;
+  --bg-elevated: #16181c;
+  --bg-raised: #1e2126;
+  --bg-overlay: rgba(10, 11, 13, 0.72);
+  --border-subtle: rgba(255, 255, 255, 0.055);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --text-primary: #ecedef;
+  --text-secondary: #a5abb3;
+  --text-muted: #767d87;
+  --text-faint: #50565f;
+  --accent: #818cf8;
+  --accent-strong: #a5b4fc;
+  --accent-soft: rgba(129, 140, 248, 0.14);
+  --accent-contrast: #0b0c10;
+  --danger: #f87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+  --warning: #fbbf24;
+  --warning-soft: rgba(251, 191, 36, 0.12);
+  --success: #34d399;
+  --success-soft: rgba(52, 211, 153, 0.12);
+  --pk: #fbbf24;
+  --pk-soft: rgba(251, 191, 36, 0.12);
+  --fk: #38bdf8;
+  --fk-soft: rgba(56, 189, 248, 0.12);
+  --uq: #a78bfa;
+  --uq-soft: rgba(167, 139, 250, 0.13);
+  --canvas-dot: rgba(255, 255, 255, 0.07);
+  --node-bg: #16181c;
+  --node-header: rgba(255, 255, 255, 0.03);
+  --node-row-border: rgba(255, 255, 255, 0.045);
+  --edge: #4d535c;
+  --edge-selected: #818cf8;
+  --editor-keyword: #8ab4ff;
+  --editor-string: #7ee2a8;
+  --editor-number: #ffb454;
+  --editor-comment: #5f6670;
+  --editor-punct: #6b7280;
+  --shadow-node: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-pop: 0 10px 32px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-float: 0 16px 48px rgba(0, 0, 0, 0.6), 0 2px 12px rgba(0, 0, 0, 0.45);
+  --ring: rgba(129, 140, 248, 0.55);
+}
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-surface: var(--bg-surface);
+  --color-elevated: var(--bg-elevated);
+  --color-raised: var(--bg-raised);
+  --color-border-subtle: var(--border-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-foreground: var(--text-primary);
+  --color-secondary: var(--text-secondary);
+  --color-muted: var(--text-muted);
+  --color-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-contrast: var(--accent-contrast);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv11", "ss01";
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-primary);
+}
+
+/* Interactive elements show a pointer cursor. Tailwind v4's preflight keeps
+   the native `cursor: default` on buttons, which makes the whole app feel
+   inert — restore the pointer for every actionable element. Disabled
+   controls keep the default arrow since they can't be acted on. */
+button:not(:disabled),
+[role="button"]:not(:disabled),
+[role="menuitem"]:not(:disabled),
+[role="switch"]:not(:disabled),
+[role="tab"]:not(:disabled),
+[role="option"]:not(:disabled),
+[role="checkbox"]:not(:disabled),
+[role="radio"]:not(:disabled),
+label[for],
+summary,
+select:not(:disabled),
+input[type="checkbox"]:not(:disabled),
+input[type="radio"]:not(:disabled),
+input[type="range"]:not(:disabled),
+input[type="file"]:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled,
+[role="button"]:disabled,
+[role="menuitem"]:disabled,
+[role="switch"]:disabled {
+  cursor: default;
+}
+
+* {
+  border-color: var(--border);
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--text-faint);
+  background-clip: content-box;
+  border: 2px solid transparent;
+}
+*::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 1px;
+  border-radius: 4px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+/* Text-entry fields show focus with their caret, so a full outline around
+   the field reads as oversized. They keep their own focus styles. */
+input:focus-visible,
+textarea:focus-visible {
+  outline: none;
+}
+
+/* Keyboard hint */
+kbd {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/* Hero headline accent — text fades from the foreground into the accent. */
+.text-gradient {
+  background-image: linear-gradient(180deg, var(--text-primary) 20%, var(--accent) 140%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  React Flow overrides                                               */
+/* ------------------------------------------------------------------ */
+
+.react-flow {
+  background: var(--bg-surface);
+}
+
+/* Edge badges (cardinality, hover labels) always render above the lines and
+   the nodes, so a line never cuts across a badge. */
+.react-flow__edgelabel-renderer {
+  z-index: 5;
+}
+
+.react-flow__node {
+  cursor: grab;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.react-flow__node.dragging {
+  cursor: grabbing;
+  transition: none;
+  z-index: 10 !important;
+}
+
+.react-flow__node:active {
+  cursor: grabbing;
+}
+
+.react-flow__edge {
+  cursor: pointer;
+}
+
+.react-flow__edge-path {
+  transition: stroke 160ms ease, stroke-width 160ms ease, opacity 160ms ease;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: var(--edge-selected);
+}
+
+.react-flow__edge.selected .react-flow__edge-path {
+  stroke-dasharray: 7 4;
+  animation: schemaflow-dash 0.7s linear infinite;
+}
+
+@keyframes schemaflow-dash {
+  to {
+    stroke-dashoffset: -11;
+  }
+}
+
+/* Handles are prefixed with .react-flow__node to win over the base xyflow
+   stylesheet, which is bundled after globals.css. */
+/*
+ * Connection handles: always visible (subtle) on columns that actually
+ * participate in a relationship — the ones that matter — and revealed on
+ * the rest only while hovering or selecting the node. Full dots, never
+ * clipped, exact edges (see table-node.tsx for the geometry).
+ */
+.react-flow__node .react-flow__handle {
+  border: 1.5px solid var(--bg);
+  background: var(--text-faint);
+  opacity: 0;
+  transition: opacity 120ms ease, background 120ms ease, border-color 120ms ease, transform 120ms ease;
+  pointer-events: none;
+}
+
+/* Only the SOURCE handles (where lines originate) are visible — the dot
+   you see on a column is where a relationship starts. Target handles
+   (where lines arrive) stay in the DOM so React Flow can route the
+   edge, but they're optically hidden. React Flow toggles a "source" /
+   "target" word on the handle's class. */
+.react-flow__node .react-flow__handle.source {
+  opacity: 0.5;
+}
+
+.react-flow__node:hover .react-flow__handle.source,
+.react-flow__node.selected .react-flow__handle.source {
+  opacity: 0.85;
+  transform: scale(1.15);
+}
+
+.react-flow__node .react-flow__handle.connectingto,
+.react-flow__node .react-flow__handle:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.react-flow__minimap {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-node);
+}
+
+.react-flow__controls {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow-node);
+  border: 1px solid var(--border);
+}
+
+.react-flow__controls-button {
+  background: var(--bg-elevated) !important;
+  border-bottom: 1px solid var(--border) !important;
+  fill: var(--text-secondary) !important;
+  color: var(--text-secondary) !important;
+  width: 30px !important;
+  height: 30px !important;
+}
+
+.react-flow__controls-button:hover {
+  background: var(--bg-raised) !important;
+}
+
+.react-flow__controls-button svg {
+  fill: currentColor !important;
+}
+
+.react-flow__attribution {
+  background: transparent !important;
+  color: var(--text-faint) !important;
+}
+.react-flow__attribution a {
+  color: var(--text-faint) !important;
+}
+
+.react-flow__node:focus {
+  outline: none;
+}
+
+/* Prevent edge selection from showing browser default */
+.react-flow__edge:focus {
+  outline: none;
+}
+
+.sql-editor textarea::selection {
+  background: var(--accent-soft);
+}
+
+/* Utility: hide scrollbar on the editor gutter sync element */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Logo intro — plays once per page session, then the logo is static   */
+/* ------------------------------------------------------------------ */
+
+.sf-logo-text {
+  animation: sf-logo-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.2s;
+}
+
+.sf-logo-line {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: sf-logo-draw 0.5s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+.sf-logo-line-a {
+  animation-delay: 0.05s;
+}
+.sf-logo-line-b {
+  animation-delay: 0.18s;
+}
+
+.sf-logo-node {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sf-logo-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.sf-logo-node-a {
+  animation-delay: 0.32s;
+}
+.sf-logo-node-b {
+  animation-delay: 0.44s;
+}
+.sf-logo-node-c {
+  animation-delay: 0.56s;
+}
+
+.sf-logo-dot {
+  animation: sf-logo-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: 0.62s;
+}
+
+@keyframes sf-logo-in {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes sf-logo-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sf-logo-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-logo-text,
+  .sf-logo-line,
+  .sf-logo-node,
+  .sf-logo-dot {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    stroke-dashoffset: 0;
+  }
+}
